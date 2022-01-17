@@ -1,0 +1,85 @@
+/* Given a string, return the reversed string ("abcd" => "dcba")
+
+
+// The most obvious solution would probably be to iterate through the entire array and return it in a different order, but may not be the most efficient, since it will take longer as the array gets larger
+
+// consider other ways to store the values
+
+// I think there are methods built into javascript which can do this easier, since things like shift/pop exist and can be used to affect the beginning and ending indexes of a given array, but am not yet sure how to apply those, but noted for later
+
+// Create a function that will store the logic to reverse a given string
+
+/* function reverseString(string) {
+  // declare and initialize an empty array in which to store the reversed string
+  let newString = '';
+  // a for loop to iterate through the array, starting from the end of the string, and decrementing
+    for (let i = string.length -1; i >= 0; i--) {
+      // simply concatenating these values to a new string
+      newString += string[i];
+    }
+    // Log the newly reveresed string output
+    console.log(newString);
+}
+
+// run the function to reverse the string
+
+reverseString('taco'); */
+
+/* 1. Return a boolean based on if two given Strings are the anagrams of each other. ("army", "mary" => True) ("abc", "baac" => False) */
+
+// Output: a true or False
+// Input: two strings ie. 'army', 'mary' , 'tank, 'healer'
+
+// create a function that will take two strings as arguments
+
+function isAnagram(str1, str2) {
+  // logic that is going to compare each string and see if they are anagrams (if they are anagrams, their character count will be the same, and they will have the same values, but perhaps in any order)
+
+  // first we can just compare the length of each string, and if they differ, we already know to return false, as they are not anagrams, an if statement
+
+  if (str1.length === str2.length) {
+    // here is where, because they are the same length, logic will proceed to compare the values and see if each string contains the same exact letters
+    // my initial thought, is it would be easier to first sort the strings and then do a direct comparison
+    // a more complicated (perhaps?) solution could be to create nested for loops, but this could be expensive on time O(n^2) or O(a*b) depending on lengths
+    // trying to think of how to sort the strings to get them in the same alphabetical order, but that may require creating a number value for each letter of the alphabet.. a lot of memory/code to write, so how else can we compare these
+    // Going to go with nested for loops first to see where that leads
+
+    // looping through the first string, and then comparing each letter/index to each of the second string, and seeing if they exist in each
+    let duplicateChars = '';
+
+    for (let i = 0; i < str1.length; i++) {
+      // thinking maybe if the same letter is found in str2, it will store it in a new string, and then compare the lengths
+
+      // repeating letters could potentially be an issue?
+        for (let j = 0; j < str2.length; j++) {
+          console.log(str1[i]);
+          console.log(str2[j]);
+          if (str1[i] === str2[j]) {
+            // has to be logic here to tell it to then continue on for the next value i in str1, 
+
+            // Might be a better way to start the loop again and keep comparing without having to store the letter
+            duplicateChars += str1[i];
+          
+          if (duplicateChars.length === str1.length) {
+            console.log("Is an anagram!");
+            return true
+          } 
+
+          else {
+            console.log("Is not an anagram!");
+            return false
+          }
+        }
+        // If any letter ever doesn't exist in both strings, end the function and return false
+        }
+    }
+  }
+    // we know if they are not equal lengths, they are not anagrams, so we can return false
+    else {
+      console.log("Is not an anagram!");
+      return false
+    }
+}
+
+// This is when I realize what could be an issue and would stop prematurely
+isAnagram('oo', 'ooooo');
